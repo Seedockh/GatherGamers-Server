@@ -11,8 +11,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(process.env.PORT || port, hostname, () => {
-    console.log(`Server running at ${hostname}:${port}`);
+app.listen(process.env.PORT, hostname, () => {
+    console.log(`Server running at ${hostname}:${process.env.PORT}`);
 });
 
 app.get('/', (req, res) => {
