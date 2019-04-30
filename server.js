@@ -8,12 +8,19 @@ import circularJson from 'circular-json';
 const hostname = 'localhost';
 const port = 3000;
 const app = express();
-const apiKey = fs.readFileSync(path.resolve(__dirname, 'apiKey'), 'utf8')
+const apiKey = process.env.IGDBKEY || fs.readFileSync(path.resolve(__dirname, 'apiKey'), 'utf8')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.listen(process.env.PORT || port, hostname, () => {
     console.log(`Server running at ${hostname}:${port}`);
+});
+
+app.get('/', (req, res) => {
+    res.send({
+        "/games": "Returns list of games ordered by popularity",
+        "/cover/:id": "Returns game cover data (like url)"
+    })
 });
 
 app.get('/games', (req, res) => {
