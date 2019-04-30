@@ -8,15 +8,15 @@ import mysql from 'mysql';
 
 const app = express();
 const port = process.env.PORT || 3000
-const connection = mysql.createConnection({
-  host: "localhost",
-  database: "gathergamers",
-  user: "root",
-  password: "root",
-  socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+const db_connection = mysql.createConnection({
+  db_host: "localhost",
+  db_database: "gathergamers",
+  db_user: "root",
+  db_password: "root",
+  db_socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
 });
 
-connection.connect( err =>{
+db_connection.connect( err =>{
   if (err) throw err;
   console.log("Connected, bitch !");
 })
