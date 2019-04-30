@@ -8,7 +8,6 @@ import circularJson from 'circular-json';
 const hostname = 'localhost';
 const port = 3000;
 const app = express();
-const apiKey = process.env.IGDBKEY || fs.readFileSync(path.resolve(__dirname, 'apiKey'), 'utf8')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -36,7 +35,7 @@ app.get('/cover/:gamecoverid', (req, res) => {
 function fetch(url, res) {
     axios.get(url, {
         headers: {
-            "user-key": apiKey,
+            "user-key": process.env.IGDBKEY || fs.readFileSync(path.resolve(__dirname, 'apiKey'), 'utf8'),
             Accept: "application/json"
         }
     })
