@@ -4,7 +4,11 @@
 
 ### Server
 - npm install
-- Create file "apiKey" and paste your API Key
+
+```
+On localhost, create file "apiKey" and paste your API Key
+```
+
 - npm start
 
 ## Links

@@ -4,15 +4,28 @@ import axios from "axios";
 import fs from 'fs';
 import path from 'path';
 import circularJson from 'circular-json';
+import mysql from 'mysql';
 
 const hostname = 'localhost';
 const port = 3000;
 const app = express();
+const connection = mysql.createConnection({
+  host: "localhost",
+  database: "gathergamers",
+  user: "root",
+  password: "root",
+  socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+});
+
+connection.connect( err =>{
+  if (err) throw err;
+  console.log("Connected, bitch !");
+})
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.listen(process.env.PORT, hostname, () => {
-    console.log(`Server running at ${hostname}:${process.env.PORT}`);
+    console.log(`Server running at ${hostname}:${process.env.PORT||port}`);
 });
 
 app.get('/', (req, res) => {
