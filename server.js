@@ -6,12 +6,11 @@ import path from 'path';
 import circularJson from 'circular-json';
 
 const hostname = 'localhost';
-const port = 3000;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(process.env.PORT, hostname, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server running at ${hostname}:${process.env.PORT}`);
 });
 
