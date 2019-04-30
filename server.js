@@ -12,7 +12,7 @@ const apiKey = fs.readFileSync(path.resolve(__dirname, 'apiKey'), 'utf8')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(port, hostname, () => {
+app.listen(process.env.PORT || port, hostname, () => {
     console.log(`Server running at ${hostname}:${port}`);
 });
 
@@ -21,8 +21,8 @@ app.get('/games', (req, res) => {
     fetch(url, res)
 });
 
-app.get('/cover/:gamecoverid', (req, res) => {  
-    const url = `https://api-v3.igdb.com/covers/${req.params.gamecoverid}?fields=url`; 
+app.get('/cover/:gamecoverid', (req, res) => {
+    const url = `https://api-v3.igdb.com/covers/${req.params.gamecoverid}?fields=url`;
     fetch(url, res)
 });
 
