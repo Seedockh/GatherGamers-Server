@@ -5,13 +5,12 @@ import fs from 'fs';
 import path from 'path';
 import circularJson from 'circular-json';
 
-const hostname = 'localhost';
 const app = express();
-
+const port = process.env.PORT || 3000
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server running at ${hostname}:${process.env.PORT}`);
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
 
 app.get('/', (req, res) => {
