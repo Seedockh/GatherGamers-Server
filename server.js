@@ -6,9 +6,8 @@ import path from 'path';
 import circularJson from 'circular-json';
 import mysql from 'mysql';
 
-const hostname = 'localhost';
-const port = 3000;
 const app = express();
+const port = process.env.PORT || 3000
 const connection = mysql.createConnection({
   host: "localhost",
   database: "gathergamers",
@@ -24,8 +23,8 @@ connection.connect( err =>{
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(process.env.PORT, hostname, () => {
-    console.log(`Server running at ${hostname}:${process.env.PORT||port}`);
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
 
 app.get('/', (req, res) => {
