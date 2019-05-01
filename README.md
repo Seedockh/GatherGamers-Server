@@ -4,7 +4,7 @@
 
 ### Server
 - `npm install`
-- Create .env file for DB connection and API Keys.
+- Create **.env** file for DB connection and API Keys.
 - `npm start`
 
 ## Links
@@ -22,3 +22,8 @@
 | `/`          | welcome page with a list of all endpoints |
 | `/games`     | lists 10 random games                     |
 | `/cover/:id` | returns game cover data (like and url)    |
+
+
+### Deployed API
+
+https://gathergamers.herokuapp.com/
