@@ -3,7 +3,7 @@ const app = express();
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const circular-json = require('circular-json');
+const circularJson = require('circular-json');
 
 app.get('/', (req, res) => {
     res.send({
