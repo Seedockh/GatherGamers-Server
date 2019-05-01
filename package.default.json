@@ -17,18 +17,14 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/register": "^7.4.4",
     "axios": "^0.18.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "body-parser": "^1.19.0",
     "circular-json": "^0.5.9",
-    "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "mysql": "^2.17.1",
-    "superagent": "^5.0.5",
-    "supertest": "^4.0.2"
+    "dotenv": "^7.0.0",
+    "jest": "^24.7.1",
+    "mysql": "^2.17.1"
   },
   "devDependencies": {
-    "jest": "^24.7.1",
     "nodemon": "^1.18.11"
   }
 }
