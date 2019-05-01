@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-import axios from 'axios';
-import fs from 'fs';
-import path from 'path';
-import circularJson from 'circular-json';
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const circular-json = require('circular-json');
 
 app.get('/', (req, res) => {
     res.send({
