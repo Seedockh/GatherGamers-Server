@@ -6,13 +6,13 @@ export default class User extends Model {
 
     return super.init(
       {
-        user_firstName: {
+        firstName: {
           type: Sequelize.STRING,
         },
-        user_lastName: {
+        lastName: {
           type: Sequelize.STRING,
         },
-        user_nickname: {
+        nickname: {
           type: Sequelize.STRING,
           unique: {
             args: true,
@@ -26,7 +26,7 @@ export default class User extends Model {
             }
           }
         },
-        user_email: {
+        email: {
           type: Sequelize.STRING,
           allowNull: false,
           validate: {
@@ -44,7 +44,7 @@ export default class User extends Model {
             notEmpty: true
           }
         },
-        user_password: {
+        password: {
           type: Sequelize.VIRTUAL,
           validate: {
             isLongEnough(v) {
@@ -54,7 +54,7 @@ export default class User extends Model {
             }
           }
         },
-        user_password_confirmation: {
+        password_confirmation: {
           type: Sequelize.VIRTUAL,
           validate: {
             isEqual(v) {
@@ -64,14 +64,14 @@ export default class User extends Model {
             }
           }
         },
-        user_city: {
+        city: {
           type: Sequelize.STRING,
         },
-        user_createdAt: {
-          type: Sequelize.TIME,
+        created_at: {
+          type: Sequelize.BIGINT,
         },
-        user_updatedAt: {
-          type: Sequelize.TIME,
+        updated_at: {
+          type: Sequelize.BIGINT,
         },
       }, {
         tableName: "user",
@@ -80,7 +80,7 @@ export default class User extends Model {
         indexes: [
           {
             unique: true,
-            fields: ["user_nickname", "user_email"]
+            fields: ["nickname", "email"]
           }
         ],
 
@@ -108,7 +108,7 @@ export default class User extends Model {
 
   async generateHash() {
     const SALT_ROUND = 5;
-    const hash = await bcrypt.hash(this.user_password, SALT_ROUND);
+    const hash = await bcrypt.hash(this.password, SALT_ROUND);
     if (!hash) {
       throw new Error("Can't hash password");
     }
@@ -116,15 +116,15 @@ export default class User extends Model {
   }
 
   async checkPassword(password) {
-    return bcrypt.compare(password, this.user_password_digest);
+    return bcrypt.compare(password, this.password_digest);
   }
 
   toJSON() {
     const values = Object.assign({}, this.get());
 
-    delete values.user_password_digest;
-    delete values.user_password;
-    delete values.user_password_confirmation;
+    delete values.password_digest;
+    delete values.password;
+    delete values.password_confirmation;
     return values;
   }
 }
