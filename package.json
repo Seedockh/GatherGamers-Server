@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "- npm install",
   "main": "start.js",
+  "engines": {
+    "node": "8.9.0"
+  },
   "scripts": {
     "test": "jest --no-cache ./*",
     "start": "babel-node ./server.js",
