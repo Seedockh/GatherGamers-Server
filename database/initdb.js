@@ -1,7 +1,8 @@
+import fs from 'fs';
 import Sequelize from "sequelize";
 import User from "./models/user";
 import Game from "./models/game";
-const config = require('./config.json').dev || null;
+const config = fs.exists('./config.json') ? require('./config.json').dev : null;
 
 export const db = (config) ? new Sequelize(
   config.database,
