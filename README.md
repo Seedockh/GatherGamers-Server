@@ -17,11 +17,12 @@
 
 ### Internal API Endpoints
 
-| endpoint     | description                               |
-|--------------|-------------------------------------------|
-| `/`          | welcome page with a list of all endpoints |
-| `/games`     | lists 10 random games                     |
-| `/cover/:id` | returns game cover data (like and url)    |
+| method       | endpoint     | description                               |
+|--------------|--------------|-------------------------------------------|
+| **GET**      | `/`          | welcome page with a list of all endpoints |
+| **GET**      | `/games`     | lists 10 random games                     |
+| **GET**      | `/cover/:id` | returns game cover data (like and url)    |
+| **POST**     | `/initdatas` | populates database from IGDB API          |
 
 
 ### Deployed API
