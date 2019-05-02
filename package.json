@@ -9,7 +9,6 @@
   "scripts": {
     "test": "jest --no-cache ./*",
     "start": "babel-node ./server.js",
-    "build": "babel . -d lib"
   },
   "repository": {
     "type": "git",
