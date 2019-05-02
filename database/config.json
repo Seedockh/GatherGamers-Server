@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "driver": "mysql",
+    "database": "gathergamers",
+    "user": "root",
+    "password": "root"
+  },
+  "production": {
+    "driver": "mysql",
+    "database": "gathergamers",
+    "user": "root",
+    "password": "root"
+  }
+}
