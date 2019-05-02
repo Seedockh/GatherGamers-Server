@@ -64,6 +64,7 @@ USE `gathergamers`;
 | Papertrail     | https://papertrailapp.com/systems/gathergamers/events   |
 | JawsDB MySQL   | https://dashboard.jawsdb.com/mysql/dashboard            |
 | SendGrid       | https://app.sendgrid.com/                               |
+| CircleCI       | https://circleci.com/gh/Seedockh/GatherGamers-Server    |
 
 ## DEPLOYED SERVER APP
 
