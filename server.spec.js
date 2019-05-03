@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./app');
+const app = require('./routes/');
 
 // TESTS THE SERVER
 describe('Test the root path',()=>{
