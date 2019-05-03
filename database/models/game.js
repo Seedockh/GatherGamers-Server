@@ -13,12 +13,6 @@ export default class Game extends Model {
         },
         summary: {
           type: Sequelize.TEXT,
-        },
-        created_at: {
-          type: Sequelize.BIGINT,
-        },
-        updated_at: {
-          type: Sequelize.BIGINT,
         }
       }, {
         tableName: "game",
