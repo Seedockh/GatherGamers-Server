@@ -1,13 +1,13 @@
 import Sequelize, { Model } from "sequelize";
 
-export default class Favourite extends Model {
+export default class Participant extends Model {
   static init(database) {
 
     return super.init(
       {
 
       }, {
-        tableName: "favourite",
+        tableName: "participant",
         sequelize: database,
       })
   };
