@@ -1,4 +1,4 @@
-import Game from './database/models/game'
+import Game from '../database/models/game'
 
 const express = require('express');
 const app = express();
