@@ -1,24 +1,43 @@
+import express from "express";
 import bodyParser from 'body-parser';
 import mysql from 'mysql';
-import app from './routes/';
+import api from './routes/';
 import { db } from './database/initdb';
-import User from './database/models/user'
-import Game from './database/models/game'
-import Event from './database/models/event'
-import Favourite from './database/models/favourite'
-import Participant from './database/models/participant'
+import passport from "passport";
+import cors from "cors";
 
-require('dotenv').config()
+require('dotenv').config();
 const port = process.env.PORT;
 
-User.sync({ force: false });
-Game.sync({ force: false });
-Event.sync({ force: false });
-Favourite.sync({ force: false });
-Participant.sync({ force: false });
+const start = async () => {
+  console.log("========= STARTING SERVER ==============");
+  try {
+    if (process.env.NODE_ENV) {
+      console.log("--- Calling db.sync");
+      await db.sync({ force: false });
+    }
 
-app.use(bodyParser.urlencoded({ extended: true }))
+    const app = express();
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+    app.use(cors());
+    console.log("--- Initializing passport");
+    app.use(passport.initialize());
+    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(bodyParser.json());
+
+    app.get("/", (request, response) => {
+      response.send("Please feel free to use our api with /api");
+    });
+
+    app.use("/api", api);
+
+    console.log("--- Calling app.listen");
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+start();

@@ -66,7 +66,9 @@ export default class User extends Model {
         },
         city: {
           type: Sequelize.STRING,
-        }
+        },
+        createdAt: Sequelize.DATE,
+        updatedAt: Sequelize.DATE
       }, {
         tableName: "user",
         sequelize: database,

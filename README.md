@@ -8,7 +8,7 @@
   PORT=SERVER_PORT
   IGDBKEY=YOUR_OWN_APIKEY
 ```
-- Create **MYSQL** database called `gathergamers` 
+- Create **MYSQL** database called `gathergamers`
 ```sql
 CREATE DATABASE IF NOT EXISTS `gathergamers` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `gathergamers`;
@@ -49,12 +49,12 @@ USE `gathergamers`;
 
 ### SERVER API Endpoints
 
-| method       | endpoint     | description                               |
-|--------------|--------------|-------------------------------------------|
-| **GET**      | `/`          | welcome page with a list of all endpoints |
-| **GET**      | `/games`     | lists 10 random games                     |
-| **GET**      | `/cover/:id` | returns game cover data (like and url)    |
-| **POST**     | `/initdatas` | populates database from IGDB API          |
+| method       | endpoint              | description                               |
+|--------------|-----------------------|-------------------------------------------|
+| **GET**      | `/api/igdb`           | welcome page with a list of all endpoints |
+| **GET**      | `/api/igdb/games`     | lists 10 random games                     |
+| **GET**      | `/api/igdb/cover/:id` | returns game cover data (like and url)    |
+| **POST**     | `/api/igdb/initdatas` | populates database from IGDB API          |
 
 
 ## RESOURCES
