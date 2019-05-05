@@ -5,22 +5,24 @@ import api from './routes/';
 import { db } from './database/initdb';
 import passport from "passport";
 import cors from "cors";
+import "./middleware/passport";
+import iconv from 'iconv-lite';
+import encodings from 'iconv-lite/encodings';
 
+iconv.encodings = encodings;
 require('dotenv').config();
 const port = process.env.PORT;
+const app = express();
 
 const start = async () => {
-  console.log("========= STARTING SERVER ==============");
   try {
     if (process.env.NODE_ENV) {
-      console.log("--- Calling db.sync");
       await db.sync({ force: false });
+    } else {
+      throw new Error('CONFIG ERROR : Please specify your NODE_ENV in an env file')
     }
 
-    const app = express();
-
     app.use(cors());
-    console.log("--- Initializing passport");
     app.use(passport.initialize());
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(bodyParser.json());
@@ -30,14 +32,11 @@ const start = async () => {
     });
 
     app.use("/api", api);
-
-    console.log("--- Calling app.listen");
-    app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-    });
   } catch (err) {
     console.log(err.message);
   }
 };
 
 start();
+
+module.exports = app.listen(port, () => console.log(`Server running on port ${port}`));

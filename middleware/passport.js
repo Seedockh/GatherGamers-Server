@@ -2,11 +2,12 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import User from "../database/models/user";
+require('dotenv').config();
 
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "nickname",
+      usernameField: "email",
       passwordField: "password"
     },
     async (email, password, next) => {
@@ -29,7 +30,7 @@ passport.use(
   new JwtStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.SUPERSECRETs
+      secretOrKey: process.env.SUPERSECRET
     },
     async (jwtPayload, next) => {
       try {

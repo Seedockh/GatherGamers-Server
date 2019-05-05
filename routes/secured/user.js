@@ -10,7 +10,7 @@ api.get("/", async (req, res) => {
   res.status(200).json({ data: { users } });
 });
 
-api.post('/:uuid', async (req,res)=> {
+api.post('/:id', async (req,res)=> {
   const user = await User.findByPk(req.params.id);
   res.status(200).json(user);
 })
@@ -73,7 +73,7 @@ api.delete('/delete/:id', async (req,res)=> {
       if (err) {
         res.status(400).json({ error: 'Token error : '+err.message });
       } else {
-        await User.destroy({where:{uuid: req.params.id}})
+        await User.destroy({where:{id: req.params.id}})
         .then( response => {
           res.status(200).json({msg: "User deleted successfully." }) })
         .catch( err => {
@@ -82,6 +82,5 @@ api.delete('/delete/:id', async (req,res)=> {
       }
   });
 })
-
 
 export default api;

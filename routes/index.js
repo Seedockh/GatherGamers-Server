@@ -7,8 +7,8 @@ import igdb from "./igdb";
 const api = Router();
 
 api.get("/", (req, res) => {
-  res.json({
-    name: "GatherGamers",
+  res.status(200).json({
+    name: "GatherGamers API",
     meta: {
       version: "1.0.0",
       status: "in dev"

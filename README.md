@@ -5,8 +5,10 @@
 - `npm install`
 - Create **.env** file for :
 ```conf
+  NODE_ENV=development
   PORT=SERVER_PORT
   IGDBKEY=YOUR_OWN_APIKEY
+  SUPERSECRET=secretphrase
 ```
 - Create **MYSQL** database called `gathergamers`
 ```sql
