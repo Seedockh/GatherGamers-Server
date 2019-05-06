@@ -10,7 +10,7 @@ api.get("/", async (req, res) => {
   res.status(200).json({ data: { users } });
 });
 
-api.post('/:id', async (req,res)=> {
+api.get('/:id', async (req,res)=> {
   const user = await User.findByPk(req.params.id);
   res.status(200).json(user);
 })
