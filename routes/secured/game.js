@@ -14,4 +14,9 @@ api.get('/:id', async (req,res)=> {
   res.status(200).json(game);
 })
 
+api.delete('/delete/:id', async (req, res) => {
+  const game = await Game.destroy({where:{id: req.params.id}})
+  res.status(200).json('delete game')
+})
+
 export default api;
