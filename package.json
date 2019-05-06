@@ -1,26 +1,56 @@
 {
-  "name": "package.json",
+  "name": "gathergamers-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "- npm install",
+  "main": "start.js",
+  "engines": {
+    "node": "8.9.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node start.js",
-    "dev": "nodemon start.js"
+    "test": "jest --no-cache ./tests/*",
+    "start": "babel-node ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seedockh/GatherGamers-Server.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seedockh/GatherGamers-Server/issues"
+  },
+  "homepage": "https://github.com/Seedockh/GatherGamers-Server#readme",
   "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "ansi-regex": "^4.1.0",
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "circular-json": "^0.5.9",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/register": "^7.4.4"
+    "fs": "0.0.1-security",
+    "iconv-lite": "^0.4.24",
+    "jest": "^24.7.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "^5.8.2",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "sequelize-test-helpers": "^1.1.0"
   }
 }
