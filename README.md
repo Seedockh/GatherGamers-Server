@@ -5,7 +5,6 @@
 - `npm install`
 - Create **.env** file for :
 ```conf
-  NODE_ENV=development
   PORT=SERVER_PORT
   IGDBKEY=YOUR_OWN_APIKEY
   SUPERSECRET=secretphrase
@@ -19,18 +18,11 @@ USE `gathergamers`;
 ```java
 {
   "dev": {
-    "driver": "mysql",
+    "dialect": "mysql",
     "database": "gathergamers",
-    "port": 3309,
-    "username": "YOUR_USERNAME",
-    "password": "YOUR_PASSWORD",
-  },
-  "production": {
-    "driver": "mysql",
-    "database": "gathergamers",
-    "port": 3309,
-    "username": "YOUR_USERNAME",
-    "password": "YOUR_PASSWORD",
+    "port": 3306,
+    "user": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD"
   }
 }
 ```
