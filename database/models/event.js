@@ -1,6 +1,6 @@
 import Sequelize, { Model } from "sequelize";
 
-export default class Game extends Model {
+export default class Event extends Model {
   static init(database) {
 
     return super.init(
@@ -8,14 +8,14 @@ export default class Game extends Model {
         name: {
           type: Sequelize.STRING,
         },
-        cover: {
-          type: Sequelize.STRING,
+        date: {
+          type: Sequelize.DATE,
         },
-        summary: {
+        place: {
           type: Sequelize.TEXT,
         }
       }, {
-        tableName: "game",
+        tableName: "event",
         sequelize: database,
       })
   };
