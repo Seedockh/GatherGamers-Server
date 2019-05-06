@@ -33,6 +33,12 @@ api.post('/add', async(req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+});
+
+// Delete game from User favourites
+api.delete('/delete/:userid/:gameid', async (req, res) => {
+  const event = await Favourite.destroy({where:{UserId: req.params.userid, GameId: req.params.gameid}})
+  res.status(200).json('SUCCESS: Favourite deleted.')
 })
 
 export default api;

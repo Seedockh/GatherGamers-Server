@@ -33,6 +33,12 @@ api.post('/add', async(req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+});
+
+// Delete user from one Event participants
+api.delete('/delete/:eventid/:userid', async (req, res) => {
+  const event = await Participant.destroy({where:{UserId: req.params.userid, EventId: req.params.eventid}})
+  res.status(200).json('SUCCESS: Participant deleted.')
 })
 
 export default api;
