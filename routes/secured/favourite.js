@@ -1,17 +1,27 @@
 import { Router } from "express";
 import Favourite from "../../database/models/favourite";
+import User from "../../database/models/user";
+import Game from "../../database/models/game";
 import Sequelize from 'sequelize';
 
 const api = Router();
 
-// Get favourite Game(s)
-api.get('/:id', async(req, res) => {
-  const favourites = await Favourite.findAll({where:{UserId: req.params.id}});
-  res.status(200).json({ data: { favourites } })
+// Get all favourites games for one user
+api.get('/user/:userid', async(req, res) => {
+  const favourite = await User.findOne({
+    where: { id: req.params.userid },
+    attributes: ['nickname','email','city'],
+    include: [{
+      model: Game,
+      attributes: ['name','cover','summary'],
+      through: { attributes: [] }
+    }]
+  });
+  res.status(200).json({ data: { favourite } })
 });
 
-// Add favourite Game
-api.post('/create', async(req, res) => {
+// Add a new participant to an event
+api.post('/add', async(req, res) => {
   const { UserId, GameId } = req.body;
   try {
     const favourite = new Favourite ({
