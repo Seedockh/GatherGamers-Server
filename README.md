@@ -63,7 +63,7 @@ USE `gathergamers`;
 | **GET**      | `/`                   |                            | token |
 | **POST**     | `/:id`                |                            | token |
 | **PUT**      | `/update/:id`         | body : { nickname, email, token } | token |
-| **PUT**      | `/updatepassword/:id` | body : { old\_password, password, password\_confirmation, token | token |
+| **PUT**      | `/updatepassword/:id` | body : { old\_password, password, password\_confirmation, token } | token |
 | **DELETE**   | `/delete/:id`         | body : { token } | token |
 
 
