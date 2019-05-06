@@ -10,7 +10,7 @@ const api = Router();
 api.use("/user", user);
 api.use("/game", game);
 api.use("/event", event);
-/*api.use("/favourite", favourite);
 api.use("/participant", participant);
-*/
+api.use("/favourite", favourite);
+
 export default api;
