@@ -9,8 +9,8 @@ const api = Router();
 
 api.use("/user", user);
 api.use("/game", game);
-/*api.use("/event", event);
-api.use("/favourite", favourite);
+api.use("/event", event);
+/*api.use("/favourite", favourite);
 api.use("/participant", participant);
 */
 export default api;
