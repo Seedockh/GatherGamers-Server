@@ -49,9 +49,9 @@ USE `gathergamers`;
 | **GET**      | `/api/igdb/games`     | lists 10 random games                                       |
 | **GET**      | `/api/igdb/cover/:id` | returns game cover data (like and url)                      |
 | **POST**     | `/api/igdb/initdatas` | populates database from IGDB API                            |
-|              |  **USER ENDPOINT** .  |                                                             |
+|              |  **USER ENDPOINT**    |                                                             |
 | **POST**     | `/api/auth/register ` | body : { nickname, email, password, password_confirmation } |
-| **POST**     | `/api/auth/login`     |                                                             |
+| **POST**     | `/api/auth/login`     | body : { email, password } + AUTH : Bearer Token            |
 
 
 ## RESOURCES
