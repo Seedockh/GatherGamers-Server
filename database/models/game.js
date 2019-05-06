@@ -13,6 +13,14 @@ export default class Game extends Model {
         },
         summary: {
           type: Sequelize.TEXT,
+        },
+        createdAt: {
+          type: Sequelize.DATE(3),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
+        },
+        updatedAt: {
+          type: Sequelize.DATE(3),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
         }
       }, {
         tableName: "game",

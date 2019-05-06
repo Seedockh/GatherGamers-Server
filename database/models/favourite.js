@@ -5,7 +5,8 @@ export default class Favourite extends Model {
 
     return super.init(
       {
-
+        createdAt: Sequelize.DATE,
+        updatedAt: Sequelize.DATE
       }, {
         tableName: "favourite",
         sequelize: database,

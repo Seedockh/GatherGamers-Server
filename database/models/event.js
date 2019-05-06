@@ -13,7 +13,9 @@ export default class Event extends Model {
         },
         place: {
           type: Sequelize.TEXT,
-        }
+        },
+        createdAt: Sequelize.DATE,
+        updatedAt: Sequelize.DATE
       }, {
         tableName: "event",
         sequelize: database,

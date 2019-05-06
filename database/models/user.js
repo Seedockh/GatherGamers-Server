@@ -66,6 +66,14 @@ export default class User extends Model {
         },
         city: {
           type: Sequelize.STRING,
+        },
+        createdAt: {
+          type: Sequelize.DATE(3),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
+        },
+        updatedAt: {
+          type: Sequelize.DATE(3),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
         }
       }, {
         tableName: "user",

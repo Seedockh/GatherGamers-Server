@@ -5,7 +5,8 @@ export default class Participant extends Model {
 
     return super.init(
       {
-
+        createdAt: Sequelize.DATE,
+        updatedAt: Sequelize.DATE
       }, {
         tableName: "participant",
         sequelize: database,
