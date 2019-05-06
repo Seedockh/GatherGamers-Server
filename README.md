@@ -43,17 +43,28 @@ USE `gathergamers`;
 
 ### SERVER API Endpoints
 
+#### LOCAL IGDB ENDPOINTS
 | method       | endpoint              | description                                                 |
 |--------------|-----------------------|-------------------------------------------------------------|
 | **GET**      | `/api/igdb`           | welcome page with a list of all endpoints                   |
 | **GET**      | `/api/igdb/games`     | lists 10 random games                                       |
 | **GET**      | `/api/igdb/cover/:id` | returns game cover data (like and url)                      |
 | **POST**     | `/api/igdb/initdatas` | populates database from IGDB API                            |
-|--------------|-----------------------|-------------------------------------------------------------|
-|                                          USER ENDPOINT                                             |   
-|--------------|-----------------------|-------------------------------------------------------------|
-| **POST**     | `/api/auth/register ` | body : { nickname, email, password, password_confirmation } |
-| **POST**     | `/api/auth/login`     | AUTH : Bearer Token + body : { email, password }            |
+
+#### AUTH ENDPOINT
+| method       | endpoint              | body                                                        |  auth |
+|--------------|-----------------------|-------------------------------------------------------------|-------|
+| **POST**     | `/api/auth/register ` | body : { nickname, email, password, password_confirmation } | token |
+| **POST**     | `/api/auth/login`     | body : { email, password }                                  | token |
+
+#### USER ENDPOINT
+| method       | endpoint              | body                       |  auth |
+|--------------|-----------------------|----------------------------|-------|
+| **GET**      | `/`                   |                            | token |
+| **POST**     | `/:id`                |                            | token |
+| **PUT**      | `/update/:id`         | body : { nickname, email, token } | token |
+| **PUT**      | `/updatepassword/:id` | body : { old\_password, password, password\_confirmation, token | token |
+| **DELETE**   | `/delete/:id`         | body : { token } | token |
 
 
 ## RESOURCES
