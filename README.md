@@ -1,5 +1,13 @@
 # GatherGamers-Server
 
+## CREW
+| name | role |
+|------|------|
+| Adrien Masson | **Client-side** : creating the screens |
+| Antoine Nivoy | **Client-side** : client->server connexion |
+| Maxime Gouénard | **Both sides** : API routes + client->server connexions |
+| Pierre Hérissé | **Server side** : Database + API Routes |
+
 ## LOCAL SETUP
 
 - `npm install`
