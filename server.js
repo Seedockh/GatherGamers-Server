@@ -11,7 +11,7 @@ require('dotenv').config();
 const port = process.env.PORT;
 
 if (process.env.NODE_ENV) {
-  db.sync({ force: false }); // evite le drop database
+  db.sync({ force: true }); // evite le drop database
 } else {
   throw new Error('CONFIG ERROR : Please specify your NODE_ENV in an env file')
 }
