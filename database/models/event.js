@@ -14,8 +14,14 @@ export default class Event extends Model {
         place: {
           type: Sequelize.TEXT,
         },
-        createdAt: Sequelize.DATE,
-        updatedAt: Sequelize.DATE
+        createdAt: {
+          type: Sequelize.DATE(3),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
+        },
+        updatedAt: {
+          type: Sequelize.DATE(3),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
+        }
       }, {
         tableName: "event",
         sequelize: database,

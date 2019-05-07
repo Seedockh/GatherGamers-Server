@@ -30,6 +30,8 @@ USE `gathergamers`;
 - `npm test`
 - `npm start`
 
+---
+
 ## APIs
 
 ### IGDB API Endpoints
@@ -41,31 +43,85 @@ USE `gathergamers`;
 | **GET**      | `- https://api-v3.igdb.com/covers/gamecoverid?fields=url`                             | returns game cover url    |
 | **GET**      | `- https://images.igdb.com/igdb/image/upload/t_720p/ey8ua9nd0zpedtlqlajx.jpg`         | returns game cover        |
 
+---
+
 ### SERVER API Endpoints
 
-#### LOCAL IGDB ENDPOINTS
-| method       | endpoint              | description                                                 |
-|--------------|-----------------------|-------------------------------------------------------------|
-| **GET**      | `/api/igdb`           | welcome page with a list of all endpoints                   |
-| **GET**      | `/api/igdb/games`     | lists 10 random games                                       |
-| **GET**      | `/api/igdb/cover/:id` | returns game cover data (like and url)                      |
-| **POST**     | `/api/igdb/initdatas` | populates database from IGDB API                            |
+- **LOCAL IGDB ENDPOINTS**
 
-#### AUTH ENDPOINT
+| method       | endpoint              | description                                                 |  auth |
+|--------------|-----------------------|-------------------------------------------------------------|-------|
+| **GET**      | `/api/igdb`           | welcome page with a list of all endpoints                   | none  |
+| **GET**      | `/api/igdb/games`     | lists 10 random games                                       | none  |
+| **GET**      | `/api/igdb/cover/:id` | returns game cover data (like and url)                      | none  |
+| **POST**     | `/api/igdb/initdatas` | populates database from IGDB API                            | none  |
+
+---
+
+- **AUTH ENDPOINT**
+
 | method       | endpoint              | body                                                        |  auth |
 |--------------|-----------------------|-------------------------------------------------------------|-------|
-| **POST**     | `/api/auth/register ` | body : { nickname, email, password, password_confirmation } | token |
+| **POST**     | `/api/auth/register ` | body : { nickname, email, password, password_confirmation } | none  |
 | **POST**     | `/api/auth/login`     | body : { email, password }                                  | token |
 
-#### USER ENDPOINT
+---
+
+- **USER ENDPOINT**
+
 | method       | endpoint                       | body                                                              |  auth |
 |--------------|--------------------------------|-------------------------------------------------------------------|-------|
 | **GET**      | `/api/user/`                   |                                                                   | token |
-| **POST**     | `/api/user/:id`                |                                                                   | token |
+| **GET**      | `/api/user/:id`                |                                                                   | token |
 | **PUT**      | `/api/user/update/:id`         | body : { nickname, email, token }                                 | token |
 | **PUT**      | `/api/user/updatepassword/:id` | body : { old\_password, password, password\_confirmation, token } | token |
 | **DELETE**   | `/api/user/delete/:id`         | body : { token }                                                  | token |
 
+---
+
+- **GAME ENDPOINT**
+
+| method       | endpoint                       | body                                                              |  auth |
+|--------------|--------------------------------|-------------------------------------------------------------------|-------|
+| **GET**      | `/api/game/`                   |                                                                   | token |
+| **GET**      | `/api/game/:id`                |                                                                   | token |
+| **DELETE**   | `/api/game/delete/:id`         | body : { token }                                                  | token |
+
+---
+
+- **EVENT ENDPOINT**
+
+| method       | endpoint                        | body                                                              |  auth |
+|--------------|---------------------------------|-------------------------------------------------------------------|-------|
+| **GET**      | `/api/event/`                   |                                                                   | token |
+| **GET**      | `/api/event/game/:gameid`       | _Display all events about one game_                               | token |
+| **GET**      | `/api/event/user/:userid`       | _Display all events created by one user_                          | token |
+| **GET**      | `/api/event/:id`                | _Display one event_                                               | token |
+| **POST**     | `/api/event/create`             | body : { name, place, date, UserId, GameId }                      | token |
+| **PUT**      | `/api/event/update/:id`         | body : { name, place, date }                                      | token |
+| **DELETE**   | `/api/event/delete/:id`         |                                                                   | token |
+
+---
+
+- **FAVOURITE ENDPOINT**
+
+| method       | endpoint                                   | body                                                       |  auth |
+|--------------|--------------------------------------------|------------------------------------------------------------|-------|
+| **GET**      | `/api/favourite/user/:userid`              | _Display all favourite games for one user_                 | token |
+| **POST**     | `/api/favourite/add`                       | body : { UserId, GameId }                                  | token |
+| **DELETE**   | `/api/favourite/delete/:userid/:gameid`    | _Delete Game from User favourites_                         | token |
+
+---
+
+- **PARTICIPANT ENDPOINT**
+
+| method       | endpoint                                   | body                                                       |  auth |
+|--------------|--------------------------------------------|------------------------------------------------------------|-------|
+| **GET**      | `/api/participant/user/:userid`            | _Display all users for one event_                          | token |
+| **POST**     | `/api/participant/add`                     | body : { UserId, EventId }                                 | token |
+| **DELETE**   | `/api/participant/delete/:eventid/:userid` | _Delete user from an Event participants_                   | token |
+
+---
 
 ## RESOURCES
 
