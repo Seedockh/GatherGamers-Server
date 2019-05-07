@@ -6,19 +6,26 @@ import passport from "passport";
 const api = Router();
 
 api.post("/register", async (req, res) => {
-  const { nickname, email, password, password_confirmation } = req.body;
+  const { firstname, lastname, nickname, email, password, password_confirmation } = req.body;
+
+  console.log(req.body);
 
   try {
     const user = new User({
+      firstname,
+      lastname,
       nickname,
       email,
       password,
       password_confirmation,
     });
 
+    console.log("----- USER : ------");
+    console.log(user);
+
     await user.save();
 
-    const payload = { id: user.id, nickname, email };
+    const payload = { id: user.id, firstname, lastname, nickname, email };
     const token = jwt.sign(payload, process.env.SUPERSECRET);
 
     res.status(201).json({ data: { user }, meta: { token } });

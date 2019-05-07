@@ -21,10 +21,13 @@ api.put('/update/:id', (req,res,next)=> {
         res.status(400).json({ error: 'Token error : '+err.message });
       } else {
         User.update(
-          { nickname: req.body.nickname,
+          { firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            nickname: req.body.nickname,
             email: req.body.email,
             password: "fake_password",
-            password_confirmation: "fake_password"
+            password_confirmation: "fake_password",
+            city: req.body.city
           }, { where : {id:req.params.id},
           returning: true, plain: true })
           .then( response => {

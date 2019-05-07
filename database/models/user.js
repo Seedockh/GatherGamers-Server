@@ -6,10 +6,10 @@ export default class User extends Model {
 
     return super.init(
       {
-        firstName: {
+        firstname: {
           type: Sequelize.STRING,
         },
-        lastName: {
+        lastname: {
           type: Sequelize.STRING,
         },
         nickname: {
