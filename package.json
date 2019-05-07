@@ -4,7 +4,7 @@
   "description": "- npm install",
   "main": "start.js",
   "engines": {
-    "node": "8.9.0"
+    "node": "8.12.0"
   },
   "scripts": {
     "test": "jest --no-cache ./tests/*",
