@@ -38,7 +38,10 @@ api.post('/create', async(req, res) => {
       place,
       date,
       UserId,
-      GameId
+      GameId,
+      price,
+      players,
+      type
     });
     await event.save();
     res.status(201).json({ data: { event } });
