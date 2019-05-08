@@ -3,7 +3,7 @@ import passport from "passport";
 import auth from "./auth";
 import secured from "./secured";
 import igdb from "./igdb";
-import sendgrid from "./sendgrid";
+import mailgun from "./mailgun";
 
 const api = Router();
 
@@ -19,7 +19,7 @@ api.get("/", (req, res) => {
 
 api.use("/auth", auth);
 api.use("/igdb",igdb);
-api.use("/sendgrid",sendgrid);
+api.use("/mailgun",mailgun);
 api.use("/", passport.authenticate("jwt", { session: false }), secured);
 
 export default api;
