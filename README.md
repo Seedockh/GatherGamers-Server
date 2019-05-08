@@ -125,7 +125,7 @@ USE `gathergamers`;
 
 | method       | endpoint                                   | body                                                       |  auth |
 |--------------|--------------------------------------------|------------------------------------------------------------|-------|
-| **GET**      | `/api/participant/user/:userid`            | _Display all users for one event_                          | token |
+| **GET**      | `/api/participant/event/:eventid`            | _Display all users for one event_                          | token |
 | **POST**     | `/api/participant/add`                     | body : { UserId, EventId }                                 | token |
 | **DELETE**   | `/api/participant/delete/:eventid/:userid` | _Delete user from an Event participants_                   | token |
 
