@@ -135,7 +135,7 @@ USE `gathergamers`;
 
 | method       | endpoint                                   | body                                                       |  auth |
 |--------------|--------------------------------------------|------------------------------------------------------------|-------|
-| **POST**     | `/api/mailgun/sendmail`                    | body : { useremail } // who will receive email             | none  |
+| **POST**     | `/api/mailgun/register`                    | body : { useremail } // who will receive email             | none  |
 
 ---
 

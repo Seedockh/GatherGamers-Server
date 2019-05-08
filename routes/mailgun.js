@@ -3,12 +3,12 @@ const express = require('express');
 const api = express();
 
 // Send mail to specified email
-api.post('/sendmail', async (req,res)=> {
+api.post('/register', async (req,res)=> {
   const data = {
     from : 'pierre.herisse@gmail.com', // don't change this address unless you authorize it on mailgun settings
     to : `${req.body.useremail}`,
-    subject : 'Hello',
-    text : 'Testing some Mailgun awesomeness!'
+    subject : 'Welcome to GatherGamers',
+    text : 'Welcome and thanks to have registered to GatherGamers ! \n \n We hope you will find everything you need to live awesome gaming experiences with other gamers. \n \n Give us your feedback anytime at pierre.herisse@gmail.com, I\'ll be glad to help. \n \n GatherGamers'
   };
 
   await request.post({
