@@ -10,10 +10,10 @@ const api = Router();
 api.get('/user/:userid', async(req, res) => {
   const favourite = await User.findOne({
     where: { id: req.params.userid },
-    attributes: ['nickname','email','city'],
+    attributes: ['id','nickname','email','city'],
     include: [{
       model: Game,
-      attributes: ['name','cover','summary'],
+      attributes: ['id','name','cover','summary'],
       through: { attributes: [] }
     }]
   });

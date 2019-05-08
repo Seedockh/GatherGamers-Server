@@ -10,10 +10,10 @@ const api = Router();
 api.get('/event/:eventid', async(req, res) => {
   const participants = await Event.findOne({
     where: { id: req.params.eventid },
-    attributes: ['name','date','place'],
+    attributes: ['id','name','date','place'],
     include: [{
       model: User,
-      attributes: ['nickname','email','city'],
+      attributes: ['id','nickname','email','city'],
       through: { attributes: [] }
     }]
   });
