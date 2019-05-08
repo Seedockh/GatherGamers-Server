@@ -31,14 +31,17 @@ api.get('/:id', async (req,res)=> {
 
 // Create Event
 api.post('/create', async(req, res) => {
-  const {name, place, date, UserId, GameId} = req.body;
+  const {name, place, date, UserId, GameId, price, players, type} = req.body;
   try {
     const event = new Event({
       name,
       place,
       date,
       UserId,
-      GameId
+      GameId,
+      price,
+      players,
+      type
     });
     await event.save();
     res.status(201).json({ data: { event } });
