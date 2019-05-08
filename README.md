@@ -123,6 +123,14 @@ USE `gathergamers`;
 
 ---
 
+- **MAILING ENDPOINT with MailGun**
+
+| method       | endpoint                                   | body                                                       |  auth |
+|--------------|--------------------------------------------|------------------------------------------------------------|-------|
+| **POST**     | `/api/mailgun/sendmail`                    | body : { useremail } // who will receive email             | none  |
+
+---
+
 ## RESOURCES
 
 | name           | url                                                     |
