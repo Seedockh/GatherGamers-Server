@@ -13,6 +13,7 @@
 - `npm install`
 - Create **.env** file for :
 ```conf
+  NODE_ENV=dev
   PORT=SERVER_PORT
   IGDBKEY=YOUR_OWN_APIKEY
   SUPERSECRET=secretphrase
