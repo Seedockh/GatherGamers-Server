@@ -31,7 +31,7 @@ api.post('/initdatas', (req,res)=> {
   axios.get(gamesUrl, {
     headers: {
         "user-key": process.env.IGDBKEY,
-        Accept: "apilication/json"
+        Accept: "application/json"
     }
   }).then((response) => {
     let fetchedGames = [];
@@ -47,7 +47,7 @@ api.post('/initdatas', (req,res)=> {
         return axios.get(coverUrl, {
           headers: {
               "user-key": process.env.IGDBKEY,
-              Accept: "apilication/json"
+              Accept: "application/json"
           }
         }).then(response => game.cover = `https:${response.data[0].url.replace('thumb','720p')}`)
           .catch(err => res.send(JSON.parse(circularJson.stringify(err.response))));
@@ -74,7 +74,7 @@ function fetch(url, res) {
   axios.get(url, {
     headers: {
         "user-key": process.env.IGDBKEY,
-        Accept: "apilication/json"
+        Accept: "application/json"
     }
   })
   .then(response => {

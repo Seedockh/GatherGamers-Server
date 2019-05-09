@@ -26,6 +26,9 @@ export default class User extends Model {
             }
           }
         },
+        picture: {
+          type: Sequelize.STRING,
+        },
         email: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -66,6 +69,9 @@ export default class User extends Model {
         },
         city: {
           type: Sequelize.STRING,
+        },
+        lastLocation: {
+          type: Sequelize.GEOMETRY('POINT',4326)
         },
         createdAt: {
           type: Sequelize.DATE(3),

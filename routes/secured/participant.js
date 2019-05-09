@@ -20,6 +20,28 @@ api.get('/event/:eventid', async(req, res) => {
   res.status(200).json({ data: { participants } })
 });
 
+// Get all events where User is participant
+api.get('/user/:userid', async(req,res)=> {
+  // Every user inscription to an event
+  const participants = await Participant.findAll({
+    where: { UserId: req.params.userid }
+  });
+  // Get events for each inscription
+  const events  = [];
+
+  const getEvents = await participants.map( async participant => {
+    const event = await Event.findOne({ where: {id: participant.EventId} });
+    await events.push(event.dataValues);
+    console.log("==== EVENT PUSHED =====");
+  });
+
+  Promise.all(getEvents).then( () => {
+    console.log("====== LOGGING EVENTS =======");
+    console.log(events);
+    res.status(200).json({ data: { events } })
+  })
+})
+
 // Add a new participant to an event
 api.post('/add', async(req, res) => {
   const { UserId, EventId } = req.body;

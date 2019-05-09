@@ -1,18 +1,15 @@
 import Sequelize, { Model } from "sequelize";
 
-export default class Event extends Model {
+export default class Notification extends Model {
   static init(database) {
 
     return super.init(
       {
-        name: {
+        message: {
           type: Sequelize.STRING,
         },
-        date: {
-          type: Sequelize.DATE,
-        },
-        place: {
-          type: Sequelize.GEOMETRY('POINT',4326)
+        type: {
+          type: Sequelize.BOOLEAN,
         },
         createdAt: {
           type: Sequelize.DATE(3),
@@ -21,18 +18,9 @@ export default class Event extends Model {
         updatedAt: {
           type: Sequelize.DATE(3),
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
-        },
-        price: {
-          type: Sequelize.INTEGER,
-        },
-        players: {
-          type: Sequelize.INTEGER,
-        },
-        type: {
-          type: Sequelize.STRING,
         }
       }, {
-        tableName: "event",
+        tableName: "notification",
         sequelize: database,
       })
   };
