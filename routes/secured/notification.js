@@ -39,10 +39,15 @@ api.post('/add', async(req, res) => {
   }
 });
 
-// Delete game from User favourites
-api.delete('/delete/:notifid', async (req, res) => {
-  const event = await Notification.destroy({where:{id: req.params.notifid}})
+// Delete one notification
+api.delete('/delete/one/:notifid', async (req, res) => {
+  const deleteOne = await Notification.destroy({where:{id: req.params.notifid}})
   res.status(200).json('SUCCESS: Notification deleted.')
 })
 
+// Delete all notifications for one user
+api.delete('/delete/alluser/:userid', async(req,res)=> {
+  const deleteForUser = await Notification.destroy({ where: {UserId: req.params.userid} })
+  res.status(200).json(`SUCCESS: Notifications for user ${req.params.userid} deleted.`)
+})
 export default api;

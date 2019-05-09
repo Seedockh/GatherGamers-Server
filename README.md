@@ -142,7 +142,8 @@ USE `gathergamers`;
 | **GET**      | `/api/notification/user/:userid`           | _Get all notifications for one user_                       | token |
 | **GET**      | `/api/notification/game/:gameid`           | _Get all notifications for one game_                       | token |
 | **POST**     | `/api/notification/add`                    | body : { message, type, UserId }                           | token |
-| **DELETE**   | `/api/notification/:notifid`               |                                                            | token |
+| **DELETE**   | `/api/notification/delete/one/:notifid`    | _Destroys one notification_                                | token |
+| **DELETE**   | `/api/notification/delete/alluser/:userid` | _Destroys all notifs of one user                           | token |
 
 
 ---
