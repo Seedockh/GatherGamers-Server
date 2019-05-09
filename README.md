@@ -126,9 +126,24 @@ USE `gathergamers`;
 
 | method       | endpoint                                   | body                                                       |  auth |
 |--------------|--------------------------------------------|------------------------------------------------------------|-------|
-| **GET**      | `/api/participant/event/:eventid`            | _Display all users for one event_                          | token |
+| **GET**      | `/api/participant/event/:eventid`          | _Display all users for one event_                          | token |
+| **GET**      | `/api/participant/user/:userid`            | _Get all events where User is participant_                 | token |
 | **POST**     | `/api/participant/add`                     | body : { UserId, EventId }                                 | token |
 | **DELETE**   | `/api/participant/delete/:eventid/:userid` | _Delete user from an Event participants_                   | token |
+
+
+---
+
+- **NOTIFICATION ENDPOINT**
+
+| method       | endpoint                                   | body                                                       |  auth |
+|--------------|--------------------------------------------|------------------------------------------------------------|-------|
+| **GET**      | `/api/notification/`                       | _Display all notifications_                                | token |
+| **GET**      | `/api/notification/user/:userid`           | _Get all notifications for one user_                       | token |
+| **GET**      | `/api/notification/game/:gameid`           | _Get all notifications for one game_                       | token |
+| **POST**     | `/api/notification/add`                    | body : { message, type, UserId }                           | token |
+| **DELETE**   | `/api/notification/:notifid`               |                                                            | token |
+
 
 ---
 
