@@ -46,6 +46,7 @@ api.post('/create', async(req, res) => {
     await event.save();
     res.status(201).json({ data: { event } });
   } catch (error) {
+    //console.log(error);
     res.status(400).json({ error: error.message });
   }
 })

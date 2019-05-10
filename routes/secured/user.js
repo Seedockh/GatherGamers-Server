@@ -40,6 +40,24 @@ api.put('/update/:id', (req,res,next)=> {
 
 });
 
+api.put('/updatelocation/:id', async (req,res,next)=> {
+  const old_user = await User.findByPk(req.params.id);
+    old_user.update({
+      lastLocation: {
+        type: 'Point',
+        coordinates: [req.body.latitude,req.body.longitude]
+      }
+    }, {
+      where : {id:req.params.id},
+      returning: true, plain: true
+    }).then( response => {
+      res.status(200).send({ msg: 'Location update done.'})
+    }).catch( err => {
+      res.status(400).json({ error: ''+err+' -> Can\'t update location for now.' });
+    });
+})
+
+
 api.put('/updatepassword/:id', async (req,res,next)=> {
     jwt.verify(req.body.token,process.env.SUPERSECRET, async (err,decoded) => {
         if (err) {
