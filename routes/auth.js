@@ -19,12 +19,7 @@ api.post("/register", async (req, res) => {
       password,
       password_confirmation,
     });
-
-    console.log("----- USER : ------");
-    console.log(user);
-
     await user.save();
-
     const payload = { id: user.id, firstname, lastname, nickname, email };
     const token = jwt.sign(payload, process.env.SUPERSECRET);
 
@@ -35,7 +30,6 @@ api.post("/register", async (req, res) => {
 });
 
 api.post("/login", async (req, res) => {
-  console.log("=========== CALLING PASSPORT.AUTHENTICATE =========");
   passport.authenticate("local", { session: false }, async (err, user) => {
     if (err) {
       res.status(400).json({

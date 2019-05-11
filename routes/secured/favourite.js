@@ -20,6 +20,20 @@ api.get('/user/:userid', async(req, res) => {
   res.status(200).json({ data: { favourite } })
 });
 
+// Get all users for one game
+api.get('/game/:gameid', async(req, res) => {
+  const favourites = await Game.findOne({
+    where: { id: req.params.gameid },
+    attributes: ['id','name'],
+    include: [{
+      model: User,
+      attributes: ['id','nickname','email','picture','lastLocation'],
+      through: { attributes: [] }
+    }]
+  });
+  res.status(200).json({ data: { favourites } })
+});
+
 // Add a new participant to an event
 api.post('/add', async(req, res) => {
   const { UserId, GameId } = req.body;

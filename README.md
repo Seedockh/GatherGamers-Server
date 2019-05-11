@@ -118,6 +118,7 @@ USE `gathergamers`;
 | method       | endpoint                                   | body                                                       |  auth |
 |--------------|--------------------------------------------|------------------------------------------------------------|-------|
 | **GET**      | `/api/favourite/user/:userid`              | _Display all favourite games for one user_                 | token |
+| **GET**      | `/api/favourite/game/:gameid`              | _Display all users having one game as favourite_           | token |
 | **POST**     | `/api/favourite/add`                       | body : { UserId, GameId }                                  | token |
 | **DELETE**   | `/api/favourite/delete/:userid/:gameid`    | _Delete Game from User favourites_                         | token |
 
