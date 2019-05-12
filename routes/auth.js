@@ -7,9 +7,6 @@ const api = Router();
 
 api.post("/register", async (req, res) => {
   const { firstname, lastname, nickname, email, password, password_confirmation } = req.body;
-
-  console.log(req.body);
-
   try {
     const user = new User({
       firstname,

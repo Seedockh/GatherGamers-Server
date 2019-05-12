@@ -150,6 +150,17 @@ USE `gathergamers`;
 
 ---
 
+- **FRIEND ENDPOINT**
+
+| method       | endpoint                                   | body                                                       |  auth |
+|--------------|--------------------------------------------|------------------------------------------------------------|-------|
+| **GET**      | `/api/friend/user/:userid`                 | _Display all friends for one user                          | token |
+| **POST**     | `/api/friend/add`                          | body : { UserId, FriendId }                                | token |
+| **DELETE**   | `/api/friend/delete/:userid/:friendid`     | _Delete a friend_                                          | token |
+
+
+---
+
 - **MAILING ENDPOINT with MailGun**
 
 | method       | endpoint                                   | body                                                       |  auth |
