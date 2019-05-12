@@ -22,7 +22,7 @@ export const db = (config) ? new Sequelize(
     define: {
       timestamps: false
     }
-  }) : new Sequelize(process.env.JAWSDB_URL);
+  }) : new Sequelize(process.env.JAWSDB_URL, {logging: false} );
 
 db.authenticate().then( (err)=> {
 		console.log('Connection has been established successfully.');

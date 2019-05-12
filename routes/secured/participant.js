@@ -32,12 +32,9 @@ api.get('/user/:userid', async(req,res)=> {
   const getEvents = await participants.map( async participant => {
     const event = await Event.findOne({ where: {id: participant.EventId} });
     await events.push(event.dataValues);
-    console.log("==== EVENT PUSHED =====");
   });
 
   Promise.all(getEvents).then( () => {
-    console.log("====== LOGGING EVENTS =======");
-    console.log(events);
     res.status(200).json({ data: { events } })
   })
 })
