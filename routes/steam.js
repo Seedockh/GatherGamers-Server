@@ -10,19 +10,26 @@ const fs = require('fs');
 const path = require('path');
 const circularJson = require('circular-json');
 
-let gameIds = []
+let fetchedGames = []
 
 api.get('/', (req, res) => {
   res.send(JSON.stringify({
-      "/games": "Returns list of games ordered by popularity",
-      "/cover/:id": "Returns game cover data (like url)"
+      "/games": "Returns list of games [id,name]",
+      "/games/details/:gameid": "Returns game detail"
   }))
 });
 
 api.get('/games', async(req, res) => {
   const url = 'http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=STEAMKEY&format=json';
-  Promise.resolve(fetch(url, res)).then( async response => {
-    await console.log(response);
+  axios.get(url, {
+    headers: {
+        Accept: "application/json"
+    }
+  }).then(async (response) => {
+    await response.data.applist.apps.map(item => {
+      fetchedGames.push(item);
+    })
+    res.send(fetchedGames);
   })
 });
 
@@ -34,45 +41,44 @@ api.get('/games/detail/:gameid', (req, res) => {
 // Send IGDB games to the Sequelize model "Game"
 api.post('/initdatas', (req,res)=> {
   // Get the games and push them in an array
-  /*const gamesUrl = 'https://api-v3.igdb.com/games/?fields=name,cover,summary&limit=50';
-  axios.get(gamesUrl, {
+  const url = 'http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=STEAMKEY&format=json';
+  axios.get(url, {
     headers: {
-        "user-key": process.env.IGDBKEY,
         Accept: "application/json"
     }
-  }).then((response) => {
-    let fetchedGames = [];
-
-    response.data.map(item => {
+  }).then(async (response) => {
+    await response.data.applist.apps.map(item => {
       fetchedGames.push(item);
+    })
+
+    // Get the details from the previous fetched IDs and stores required data
+    const getDetails = fetchedGames.map( (game,index) => {
+      if (index!==500) return null;
+      const gameid = game.appid;
+      const detailUrl = `https://store.steampowered.com/api/appdetails?appids=${gameid}`;
+      return axios.get(detailUrl).then( response => {
+        const details = response.data[gameid];
+        if (details.success && details.data.metacritic) {
+        const result = {
+
+        }
+        return game = `https:${response.data[0].url.replace('thumb','720p')}`)
+      }).catch( err => {
+        return res.send(JSON.parse(circularJson.stringify(err.response)));
+      });
     });
 
-    // Get the cover from the previous fetched ID and replace it by the url
-    const fixCovers = fetchedGames.map(game => {
-      if (game.cover) {
-        const coverUrl = `https://api-v3.igdb.com/covers/${game.cover}?fields=url`;
-        return axios.get(coverUrl, {
-          headers: {
-              "user-key": process.env.IGDBKEY,
-              Accept: "application/json"
-          }
-        }).then(response => game.cover = `https:${response.data[0].url.replace('thumb','720p')}`)
-          .catch(err => res.send(JSON.parse(circularJson.stringify(err.response))));
-      } else {
-        game.cover = "http://vignette2.wikia.nocookie.net/e__/images/8/86/No_cover.png/revision/latest?cb=20130103223703&path-prefix=eminem";
-      }
-    });
-
+/*
     // When both fetches are done, send the Games to the DB
     Promise.all(fixCovers).then( () => {
       fetchedGames.map( game => Game.findOrCreate({where: game, default: game}));
       res.send(fetchedGames);
     });
+*/
   }).catch(err => {
     let json = circularJson.stringify(err.response);
     res.send(JSON.parse(json))
   });
-  */
 })
 
 
