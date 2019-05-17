@@ -58,95 +58,84 @@ api.post('/getgamesids', (req,res)=> {
 
 api.post('/getgoodgames', async (req,res)=> {
   console.clear();
+  let startIndex = 0, endIndex = 200;
   const rawGameIds = await fs.readFileSync('./database/steam/appids.js');
   const gameids = await JSON.parse(rawGameIds);
   // Get the details from the previous fetched IDs and stores required data
   console.log("======== TOTAL GAMES : "+gameids.length+" =========");
   console.log("Checking for "+gameids.length+" indexes...");
   let percile = 1;
-  const getDetails = await gameids.map( async (game,index) => {
 
-    if (index>=(gameids.length/100)*percile) percile++;
-    console.log("Done : "+percile+"%...");
+  while(endIndex<gameids.length) {
+    console.log('< ( ENDINDEX < GAMEIDS.LENGTH ) >');
+    for (let i=startIndex;i<=endIndex;i++) {
+      console.log(`< FOR ${i} < ${endIndex} >`);
+      await setTimeout( async()=>{
+        if (i>=(gameids.length/100)*percile) percile++;
+        const game = gameids[i];
+        const gameid = game.appid;
+        const detailUrl = `https://store.steampowered.com/api/appdetails?appids=${gameid}`;
 
+        await axios.get(detailUrl, {
+          headers: {
+              Accept: "application/json"
+          }
+        }).then( async response => {
+              console.log("  --- Details :");
+              console.log("  >>>>> GAMEID = "+gameid+" <<<<<   ");
+              console.log("  >>>>> INDEX  = "+index+"  <<<<<   ");
+              const fullDetails = response.data
+              const details = fullDetails[gameid].success ? fullDetails[gameid].data : null;
+              if (details!==null) {
+                 if (details.metacritic!==undefined && details.recommendations!==undefined) {
+                   if (details.metacritic.score>75 && details.recommendations.total>1000) {
+                     console.log("++++++++++ GOOD GAME : "+details.name+" ++++++++++");
+                     const validGame = {
+                       name: details.name,
+                       summary: details.detailed_description,
+                       cover: details.header_image,
+                       background: details.background,
+                       developers: details.developers,
+                       release: details.release_date,
+                       metacritic: details.metacritic.score,
+                       recommendations: details.recommendations.total
+                     }
+                     console.log(" ----> SENDING VALID GAME");
+                     await validGames.push(validGame);
+                     console.log("Done : "+percile+"%...");
 
+                   } else {
+                     console.log(`--------- GAME NOT GOOD ENOUGH () --------------`);
+                     return null;
+                   }
+                } else {
+                  console.log(`*********** GAME HAS NO NOTATION () ***********`);
+                  return null;
+                }
+              } else {
+                console.log(`........... GAME ID INVALID () ...........`);
+                return null;
+              }
 
-                      if (index>300) return null;
-                      const gameid = game.appid;
-                      const detailUrl = `https://store.steampowered.com/api/appdetails?appids=${gameid}`;
-                      return await axios.get(detailUrl, {
-                        headers: {
-                            Accept: "application/json"
-                        }
-                      }).then( async response => {
+              if (i>=endIndex) {
+                startIndex += 200;
+                endIndex += 200;
+              }
 
-                        return new Promise((resolve,reject)=>{
+        }).catch( err => {
+          console.log("XXXXXXXX ERROR FETCHING DETAILS XXXXXXXXXX");
+          return console.log(err.response.status);
+          //return res.send(err);
+        })
 
-                          setTimeout(async()=> {
+      },5000)
 
+    }
 
-                            console.log("=========  GETTING GAME DETAILS  =========");
-                            console.log("  >>>>> GAMEID : "+gameid+" <<<<<   ");
-                            console.log("  >>>>> INDEX  : "+index+"  <<<<<   ");
-                            const fullDetails = response.data
-                            const details = fullDetails[gameid].success ? fullDetails[gameid].data : null;
-                            if (details!==null) {
-                               if (details.metacritic!==undefined && details.recommendations!==undefined) {
-                                 if (details.metacritic.score>75 && details.recommendations.total>1000) {
-                                   console.log("++++++++++ GOOD GAME : "+details.name+" ++++++++++");
-                                   const validGame = {
-                                     name: details.name,
-                                     summary: details.detailed_description,
-                                     cover: details.header_image,
-                                     background: details.background,
-                                     developers: details.developers,
-                                     release: details.release_date,
-                                     metacritic: details.metacritic.score,
-                                     recommendations: details.recommendations.total
-                                   }
-                                   console.log(" >>>>>> SENDING VALID GAME <<<<<<<<");
-                                   return validGames.push(validGame);
-                                 } else {
-                                   console.log(`--------- GAME NOT GOOD ENOUGH () --------------`);
-                                   return null;
-                                 }
-                              } else {
-                                console.log(`*********** GAME HAS NO NOTATION () ***********`);
-                                return null;
-                              }
-                            } else {
-                              console.log(`........... GAME ID INVALID () ...........`);
-                              return null;
-                            }
+  }
 
-
-
-                          },5000);
-
-
-
-
-                        })
-
-
-                      }).catch( err => {
-                        console.log("XXXXXXXX ERROR FETCHING DETAILS XXXXXXXXXX");
-                        return console.log(err.response.status);
-                        //return res.send(err);
-                      })
-
-
-
-
-  });
-
-  // When both fetches are done, send the Games to the DB
-  Promise.all(getDetails).then( () => {
-    console.log(" !!!!!!!!!!!  PROMISES DONE !!!!!!!!!!! ");
-    fs.appendFileSync('./database/steam/goodgames.js',JSON.stringify(validGames));
-    //fetchedGames.map( game => Game.findOrCreate({where: game, default: game}));
-    res.send(validGames);
-  });
+  fs.appendFileSync('./database/steam/goodgames.js',JSON.stringify(validGames));
+  //fetchedGames.map( game => Game.findOrCreate({where: game, default: game}));
 })
 
 
