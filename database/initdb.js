@@ -7,6 +7,7 @@ import Favourite from "./models/favourite";
 import Participant from "./models/participant";
 import Notification from "./models/notification";
 import Friend from "./models/friend";
+import Topic from "./models/topic"
 
 const config = fs.existsSync(__dirname.replace('\\','/')+'/config.json') ? require('./config.json').dev : null;
 
@@ -38,6 +39,7 @@ Favourite.init(db);
 Participant.init(db);
 Notification.init(db);
 Friend.init(db);
+Topic.init(db)
 
 User.belongsToMany(Game,{through:Favourite});
 Game.belongsToMany(User,{through:Favourite});
@@ -59,3 +61,8 @@ User.hasMany(Notification);
 
 Notification.belongsTo(Game);
 Game.hasMany(Notification);
+
+Topic.belongsTo(User)
+Topic.belongsTo(Game)
+User.hasMany(Topic)
+Game.hasMany(Topic)
