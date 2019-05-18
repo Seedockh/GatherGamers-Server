@@ -63,6 +63,7 @@ Notification.belongsTo(Game);
 Game.hasMany(Notification);
 
 Topic.belongsTo(User)
-Topic.belongsTo(Game)
 User.hasMany(Topic)
+
+Topic.belongsTo(Game)
 Game.hasMany(Topic)
