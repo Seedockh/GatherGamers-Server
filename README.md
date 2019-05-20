@@ -161,6 +161,17 @@ USE `gathergamers`;
 
 ---
 
+- **TOPIC ENDPOINT**
+
+| method       | endpoint                                   | body                                                       |  auth |
+|--------------|--------------------------------------------|------------------------------------------------------------|-------|
+| **GET**      | `/api/topic/`                 | _Display all topic_                          | token |
+| **GET**     | `/api/topic/:userid`                          | _Display all topic for one user_                                | token |
+| **GET**   | `/api/topic/:gameid`     | _Display all topic for one game_                                          | token |
+
+
+---
+
 - **MAILING ENDPOINT with MailGun**
 
 | method       | endpoint                                   | body                                                       |  auth |
