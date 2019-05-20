@@ -17,7 +17,7 @@ export default class Message extends Model {
                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)')
                 }
             }, {
-                tableName: "topic",
+                tableName: "message",
                 sequelize: database,
             })
     };
